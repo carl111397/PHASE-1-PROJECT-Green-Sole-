@@ -1,0 +1,67 @@
+{
+  "diseases": [
+    {
+      "id": 1,
+      "name": "Powdery Mildew",
+      "crop": "Wheat",
+      "symptoms": "White powdery spots on leaves and stems",
+      "solution": "Apply sulfur-based fungicides and ensure proper plant spacing for air circulation",
+      "difficulty": 3
+    },
+    {
+      "id": 2,
+      "name": "Late Blight",
+      "crop": "Tomatoes, Potatoes",
+      "symptoms": "Dark lesions on leaves with white fungal growth under moist conditions",
+      "solution": "Remove infected plants, apply copper-based fungicides, and avoid overhead watering",
+      "difficulty": 4
+    },
+    {
+      "id": 3,
+      "name": "Fusarium Wilt",
+      "crop": "Bananas",
+      "symptoms": "Yellowing and wilting of lower leaves, vascular discoloration",
+      "solution": "Use resistant varieties, practice crop rotation, and solarize soil",
+      "difficulty": 5
+    },
+    {
+      "id": 4,
+      "name": "Bacterial Leaf Spot",
+      "crop": "Peppers",
+      "symptoms": "Small, water-soaked spots that turn brown or black with yellow halos",
+      "solution": "Remove infected leaves, avoid overhead watering, and apply copper sprays",
+      "difficulty": 2
+    },
+    {
+      "id": 5,
+      "name": "Root Knot Nematodes",
+      "crop": "Various Vegetables",
+      "symptoms": "Galls or knots on roots, stunted growth, yellowing plants",
+      "solution": "Solarize soil, use nematode-resistant varieties, and practice crop rotation",
+      "difficulty": 4
+    }
+  ],
+  "solutions": [
+    {
+      "id": 1,
+      "cropName": "Tomatoes",
+      "problem": "Blossom End Rot",
+      "solution": "Maintain consistent soil moisture and add calcium to the soil",
+      "upvotes": 5
+    },
+    {
+      "id": 2,
+      "cropName": "Maize",
+      "problem": "Armyworm Infestation",
+      "solution": "Use neem oil spray or introduce natural predators like birds",
+      "upvotes": 3
+    },
+    {
+      "id": "d243",
+      "cropName": "Test",
+      "problem": "Test",
+      "solution": "test",
+      "upvotes": 0
+    }
+  ]
+}
