@@ -3,20 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Sol(ve) - Agri-Tech Solutions</title>
+    <title>Green Sole - Revolutionizing Agriculture in Kenya</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --primary-color: #2e7d32;
             --secondary-color: #1b5e20;
             --accent-color: #7cb342;
             --light-accent: #aed581;
+            --dark-accent: #1b5e20;
             --text-color: #333;
+            --light-text: #f5f5f5;
             --bg-color: #f5f5f5;
             --card-bg: #ffffff;
-            --shadow: 0 4px 6px rgba(0,0,0,0.1);
-            --border-radius: 12px;
-            --transition: all 0.3s ease;
+            --shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --border-radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-accent: linear-gradient(135deg, var(--accent-color), var(--light-accent));
         }
 
         .dark-mode {
@@ -27,7 +33,7 @@
             --text-color: #e0e0e0;
             --bg-color: #121212;
             --card-bg: #1e1e1e;
-            --shadow: 0 4px 6px rgba(0,0,0,0.3);
+            --shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
         * {
@@ -37,81 +43,165 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.7;
             transition: var(--transition);
-            background-image: linear-gradient(to bottom right, rgba(124, 179, 66, 0.05), rgba(30, 124, 30, 0.03));
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(124, 179, 66, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(30, 124, 30, 0.05) 0%, transparent 20%);
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         header {
-            background-color: var(--primary-color);
+            background: var(--gradient-primary);
             color: white;
-            padding: 1.5rem;
+            padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
             position: sticky;
             top: 0;
             z-index: 100;
+            animation: headerSlide 0.8s ease-out;
+        }
+
+        @keyframes headerSlide {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
         }
 
         .logo i {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--light-accent);
+            text-shadow: 0 0 15px rgba(255,255,255,0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
+            letter-spacing: 0.5px;
+            font-family: 'Roboto Slab', serif;
         }
 
         .tagline {
-            font-size: 1rem;
+            font-size: 1.1rem;
             opacity: 0.9;
             margin-top: 5px;
+            font-weight: 300;
         }
 
         #theme-toggle {
-            padding: 0.8rem 1.5rem;
-            background-color: var(--accent-color);
+            padding: 0.8rem 1.8rem;
+            background: var(--gradient-accent);
             color: white;
             border: none;
-            border-radius: var(--border-radius);
+            border-radius: 50px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 600;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
         #theme-toggle:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
         }
 
         main {
-            padding: 2rem;
-            max-width: 1200px;
+            padding: 2.5rem;
+            max-width: 1400px;
             margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            margin: 2rem auto;
+            border-radius: var(--border-radius);
+            background: var(--gradient-primary);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 25%);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            font-family: 'Roboto Slab', serif;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .mission-statement {
+            background: rgba(0,0,0,0.2);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 900px;
+            border-left: 4px solid var(--light-accent);
         }
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
         }
 
         section {
@@ -120,115 +210,139 @@
             box-shadow: var(--shadow);
             transition: var(--transition);
             overflow: hidden;
-            border: 1px solid rgba(124, 179, 66, 0.1);
+            border: 1px solid rgba(124, 179, 66, 0.15);
+            animation: cardAppear 0.8s ease-out;
+            animation-fill-mode: backwards;
+        }
+
+        @keyframes cardAppear {
+            0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .section-header {
-            background-color: var(--primary-color);
+            background: var(--gradient-primary);
             color: white;
-            padding: 1.2rem;
+            padding: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
         .section-header i {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
         }
 
         .section-content {
-            padding: 1.5rem;
+            padding: 2rem;
         }
 
-        .disease-card, .solution-card {
+        .disease-card, .solution-card, .tech-card {
             background-color: var(--card-bg);
-            padding: 1.5rem;
-            margin: 1.2rem 0;
+            padding: 1.8rem;
+            margin: 1.5rem 0;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
             border-left: 4px solid var(--accent-color);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
-        .disease-card:hover, .solution-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        .disease-card:hover, .solution-card:hover, .tech-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
         }
 
-        .disease-card h3, .solution-card h3 {
+        .disease-card::before, .solution-card::before, .tech-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-accent);
+        }
+
+        .disease-card h3, .solution-card h3, .tech-card h3 {
             margin-top: 0;
             color: var(--secondary-color);
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+            font-weight: 600;
         }
 
-        .disease-card p, .solution-card p {
-            margin: 0.8rem 0;
-            line-height: 1.7;
+        .disease-card p, .solution-card p, .tech-card p {
+            margin: 1rem 0;
+            line-height: 1.8;
         }
 
         .difficulty {
             display: inline-block;
-            padding: 0.4rem 0.8rem;
-            background-color: var(--accent-color);
+            padding: 0.5rem 1rem;
+            background: var(--gradient-accent);
             color: white;
-            border-radius: var(--border-radius);
+            border-radius: 30px;
             font-weight: bold;
-            margin-top: 0.8rem;
-            font-size: 0.9rem;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .upvote-btn {
-            background-color: var(--primary-color);
+            background: var(--gradient-primary);
             color: white;
             border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: var(--border-radius);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
             cursor: pointer;
-            margin-right: 1rem;
+            margin-top: 1rem;
             transition: var(--transition);
-            font-weight: bold;
+            font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .upvote-btn:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
         }
 
         .upvote-count {
             font-weight: bold;
             color: var(--secondary-color);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            margin-left: 1rem;
         }
 
         form {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.8rem;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.8rem;
         }
 
         label {
-            font-weight: bold;
+            font-weight: 600;
             color: var(--secondary-color);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            font-size: 1.1rem;
         }
 
-        input, textarea {
-            padding: 0.9rem;
-            border: 1px solid #ddd;
+        input, textarea, select {
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
             border-radius: var(--border-radius);
             font-family: inherit;
             font-size: 1rem;
@@ -237,128 +351,147 @@
             color: var(--text-color);
         }
 
-        input:focus, textarea:focus {
+        input:focus, textarea:focus, select:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(124, 179, 66, 0.2);
+            box-shadow: 0 0 0 4px rgba(124, 179, 66, 0.2);
         }
 
         textarea {
-            min-height: 120px;
+            min-height: 150px;
             resize: vertical;
         }
 
         button[type="submit"] {
-            background-color: var(--primary-color);
+            background: var(--gradient-primary);
             color: white;
             border: none;
-            padding: 0.9rem 1.8rem;
-            border-radius: var(--border-radius);
+            padding: 1rem 2rem;
+            border-radius: 50px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 600;
             transition: var(--transition);
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             width: fit-content;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
         button[type="submit"]:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
         }
 
         .search-container {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
             align-items: center;
         }
 
         #search-input {
-            padding: 0.9rem;
+            padding: 1rem;
             flex-grow: 1;
             border: 2px solid var(--light-accent);
+            font-size: 1.1rem;
+            border-radius: 50px;
         }
 
         #search-btn {
-            padding: 0.9rem 1.8rem;
-            background-color: var(--primary-color);
+            padding: 1rem 2rem;
+            background: var(--gradient-primary);
             color: white;
             border: none;
-            border-radius: var(--border-radius);
+            border-radius: 50px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 600;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
         #search-btn:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
         }
 
         #search-results {
-            margin-top: 1.5rem;
+            margin-top: 1.8rem;
         }
 
         .stats {
             display: flex;
             justify-content: space-between;
-            margin-top: 2rem;
-            padding: 1rem;
+            margin-top: 3rem;
+            padding: 1.5rem;
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
+            animation: fadeIn 1s ease-out;
         }
 
         .stat-card {
             text-align: center;
-            padding: 1rem;
+            padding: 1.5rem;
+            flex: 1;
+            transition: var(--transition);
+            border-radius: var(--border-radius);
+        }
+
+        .stat-card:hover {
+            background: rgba(124, 179, 66, 0.1);
+            transform: translateY(-5px);
         }
 
         .stat-card i {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--accent-color);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
 
         .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
+            font-size: 2.5rem;
+            font-weight: 700;
             color: var(--secondary-color);
+            margin-bottom: 0.5rem;
         }
 
         .stat-label {
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             color: var(--text-color);
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         .error {
             color: #d32f2f;
             font-weight: bold;
-            padding: 1rem;
+            padding: 1.2rem;
             background-color: rgba(211, 47, 47, 0.1);
             border-radius: var(--border-radius);
-            margin: 1rem 0;
+            margin: 1.5rem 0;
+            border-left: 4px solid #d32f2f;
         }
 
         .notification {
             position: fixed;
             top: 20px;
             right: 20px;
-            padding: 1rem 2rem;
-            background-color: var(--primary-color);
+            padding: 1.2rem 2.2rem;
+            background: var(--gradient-accent);
             color: white;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
             transform: translateX(200%);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .notification.show {
@@ -368,13 +501,13 @@
         .loading {
             display: flex;
             justify-content: center;
-            padding: 2rem;
+            padding: 2.5rem;
         }
 
         .loading i {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--accent-color);
-            animation: spin 1s linear infinite;
+            animation: spin 1.2s linear infinite;
         }
 
         @keyframes spin {
@@ -382,14 +515,228 @@
             100% { transform: rotate(360deg); }
         }
 
+        .tech-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .tech-card {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .tech-icon {
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .visualization-container {
+            height: 400px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin: 2.5rem 0;
+            position: relative;
+            box-shadow: var(--shadow);
+            background: linear-gradient(45deg, #1b5e20, #2e7d32);
+        }
+
+        #farm-visualization {
+            width: 100%;
+            height: 100%;
+        }
+
+        .visualization-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: rgba(0,0,0,0.7);
+            color: white;
+        }
+
+        .chat-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 380px;
+            height: 500px;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            overflow: hidden;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+        }
+
+        .chat-container.open {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .chat-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .message {
+            padding: 1rem 1.5rem;
+            border-radius: 20px;
+            max-width: 80%;
+            animation: messageAppear 0.3s ease-out;
+        }
+
+        @keyframes messageAppear {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .user-message {
+            background: var(--gradient-primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .bot-message {
+            background-color: rgba(124, 179, 66, 0.15);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        #chat-input {
+            flex: 1;
+            padding: 0.8rem 1.2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            margin-right: 0.8rem;
+        }
+
+        #send-chat {
+            padding: 0.8rem 1.5rem;
+            background: var(--gradient-accent);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+
+        .chat-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 900;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: var(--transition);
+        }
+
+        .chat-toggle:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .chat-toggle i {
+            font-size: 2rem;
+        }
+
+        .market-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .market-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 1.8rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(124, 179, 66, 0.2);
+        }
+
+        .market-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+
+        .crop-stats {
+            height: 300px;
+            margin: 2rem 0;
+        }
+
+        .solution-form {
+            background: rgba(124, 179, 66, 0.1);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .disease-result {
+            background: rgba(124, 179, 66, 0.1);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--accent-color);
+        }
+
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 1.2rem;
                 text-align: center;
             }
             
-            .grid-container {
+            .grid-container, .tech-showcase, .market-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -404,7 +751,22 @@
             
             .stats {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 1.2rem;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .chat-container {
+                width: 90%;
+                height: 70vh;
+                left: 5%;
+                right: auto;
             }
         }
     </style>
@@ -413,9 +775,9 @@
     <header>
         <div class="logo">
             <i class="fas fa-seedling"></i>
-            <div>
-                <h1>Green Sol(ve)</h1>
-                <div class="tagline">AI-Assisted Crop Management Solutions</div>
+            <div class="logo-text">
+                <h1>Green Sole</h1>
+                <div class="tagline">Tech + Tradition + Impact</div>
             </div>
         </div>
         <button id="theme-toggle">
@@ -424,60 +786,62 @@
     </header>
 
     <main>
-        <div class="grid-container">
-            <section>
-                <div class="section-header">
-                    <i class="fas fa-bug"></i>
-                    <h2>Common Crop Diseases</h2>
-                </div>
-                <div class="section-content" id="diseases-container">
-                    <div class="loading">
-                        <i class="fas fa-spinner fa-spin"></i>
-                    </div>
-                </div>
-            </section>
+        <div class="hero">
+            <h2>Transforming Agriculture in Kenya and Beyond</h2>
+            <p>Combining advanced technology with sustainable farming to tackle food insecurity</p>
+            
+            <div class="mission-statement">
+                <p>Green Sole aims to leave a lasting footprint on the agricultural ecosystem by improving how humans and machines collaborate in farming. Our vision is to empower farmers with AI-driven tools, precision technology, and direct market access.</p>
+            </div>
+        </div>
 
-            <section>
-                <div class="section-header">
-                    <i class="fas fa-search"></i>
-                    <h2>Search Crops</h2>
-                </div>
-                <div class="section-content">
-                    <div class="search-container">
-                        <input type="text" id="search-input" placeholder="Search crops or diseases...">
-                        <button id="search-btn">
-                            <i class="fas fa-search"></i> Search
-                        </button>
-                    </div>
-                    <div id="search-results"></div>
-                </div>
-            </section>
+        <div class="visualization-container">
+            <canvas id="farm-visualization"></canvas>
+            <div class="visualization-overlay">
+                <h3>Agricultural Impact Dashboard</h3>
+                <p>Real-time insights into crop health, yield predictions, and resource optimization</p>
+            </div>
         </div>
 
         <div class="grid-container">
             <section>
                 <div class="section-header">
-                    <i class="fas fa-lightbulb"></i>
-                    <h2>Submit Your Solution</h2>
+                    <i class="fas fa-robot"></i>
+                    <h2>AI Crop Diagnosis</h2>
                 </div>
                 <div class="section-content">
-                    <form id="solution-submission-form">
-                        <div class="form-group">
-                            <label for="crop-name"><i class="fas fa-apple-alt"></i> Crop Name</label>
-                            <input type="text" id="crop-name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="problem"><i class="fas fa-exclamation-triangle"></i> Problem / Disease</label>
-                            <input type="text" id="problem" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="solution"><i class="fas fa-wrench"></i> Solution</label>
-                            <textarea id="solution" required></textarea>
-                        </div>
-                        <button type="submit">
-                            <i class="fas fa-paper-plane"></i> Submit Solution
+                    <div class="search-container">
+                        <select id="crop-select" style="flex-grow: 1; padding: 1rem; border-radius: 50px;">
+                            <option value="">Select a crop...</option>
+                            <option value="maize">Maize</option>
+                            <option value="wheat">Wheat</option>
+                            <option value="coffee">Coffee</option>
+                            <option value="tea">Tea</option>
+                            <option value="tomato">Tomato</option>
+                            <option value="banana">Banana</option>
+                        </select>
+                    </div>
+                    <div class="search-container">
+                        <select id="symptom-select" style="flex-grow: 1; padding: 1rem; border-radius: 50px;">
+                            <option value="">Select symptoms...</option>
+                            <option value="yellowing">Yellowing leaves</option>
+                            <option value="spots">Brown spots</option>
+                            <option value="wilting">Wilting plants</option>
+                            <option value="holes">Holes in leaves</option>
+                            <option value="mold">White mold</option>
+                            <option value="stunted">Stunted growth</option>
+                        </select>
+                        <button id="diagnose-btn">
+                            <i class="fas fa-diagnoses"></i> Diagnose
                         </button>
-                    </form>
+                    </div>
+                    
+                    <div id="diagnosis-results">
+                        <div class="disease-result">
+                            <h3><i class="fas fa-bug"></i> Crop Diagnosis Results</h3>
+                            <p>Select a crop and symptoms to get AI-powered diagnosis</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -486,136 +850,495 @@
                     <i class="fas fa-users"></i>
                     <h2>Community Solutions</h2>
                 </div>
-                <div class="section-content" id="solutions-container">
-                    <div class="loading">
-                        <i class="fas fa-spinner fa-spin"></i>
+                <div class="section-content">
+                    <div class="solution-form">
+                        <h3><i class="fas fa-lightbulb"></i> Share Your Solution</h3>
+                        <form id="solution-form">
+                            <div class="form-group">
+                                <label for="solution-crop"><i class="fas fa-leaf"></i> Crop</label>
+                                <input type="text" id="solution-crop" required placeholder="Which crop is affected?">
+                            </div>
+                            <div class="form-group">
+                                <label for="solution-problem"><i class="fas fa-exclamation-triangle"></i> Problem</label>
+                                <input type="text" id="solution-problem" required placeholder="Describe the problem">
+                            </div>
+                            <div class="form-group">
+                                <label for="solution-description"><i class="fas fa-wrench"></i> Your Solution</label>
+                                <textarea id="solution-description" required placeholder="How did you solve it?"></textarea>
+                            </div>
+                            <button type="submit">
+                                <i class="fas fa-share"></i> Share Solution
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div id="solutions-container">
+                        <div class="solution-card">
+                            <h3><i class="fas fa-user"></i> John K. - Nakuru (Maize)</h3>
+                            <p><strong>Problem:</strong> Armyworm infestation destroying leaves</p>
+                            <p><strong>Solution:</strong> Used neem oil spray combined with intercropping with beans. Reduced infestation by 90% in 2 weeks.</p>
+                            <button class="upvote-btn"><i class="fas fa-thumbs-up"></i> Helpful (42)</button>
+                        </div>
+                        <div class="solution-card">
+                            <h3><i class="fas fa-user"></i> Mary W. - Kisumu (Tomatoes)</h3>
+                            <p><strong>Problem:</strong> Blossom end rot affecting fruit</p>
+                            <p><strong>Solution:</strong> Added crushed eggshells to soil for calcium and maintained consistent watering. Next harvest had 95% healthy fruit.</p>
+                            <button class="upvote-btn"><i class="fas fa-thumbs-up"></i> Helpful (28)</button>
+                        </div>
                     </div>
                 </div>
             </section>
         </div>
 
+        <div class="section-header" style="margin-top: 3rem; border-radius: var(--border-radius);">
+            <i class="fas fa-microchip"></i>
+            <h2>Our Technology Ecosystem</h2>
+        </div>
+
+        <div class="tech-showcase">
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <i class="fas fa-helicopter"></i>
+                </div>
+                <h3>Drone Technology</h3>
+                <p>DJI AGRAS T80 drones for precision spraying, seeding, and crop monitoring. Cover up to 100 acres per day with centimeter-level accuracy.</p>
+            </div>
+            
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>AI Assistant</h3>
+                <p>Natural language processing to answer farming questions in Swahili and English. Real-time diagnosis of crop issues from uploaded photos.</p>
+            </div>
+            
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <i class="fas fa-route"></i>
+                </div>
+                <h3>Smart Logistics</h3>
+                <p>ERP system connecting farmers directly to markets. Reduce post-harvest losses with optimized delivery routes and digital inventory.</p>
+            </div>
+        </div>
+
         <div class="stats">
             <div class="stat-card">
-                <i class="fas fa-disease"></i>
-                <div class="stat-number" id="disease-count">0</div>
-                <div class="stat-label">Diseases Cataloged</div>
+                <i class="fas fa-tractor"></i>
+                <div class="stat-number">2,850+</div>
+                <div class="stat-label">Farmers Empowered</div>
             </div>
             <div class="stat-card">
-                <i class="fas fa-comments"></i>
-                <div class="stat-number" id="solution-count">0</div>
-                <div class="stat-label">Community Solutions</div>
+                <i class="fas fa-chart-line"></i>
+                <div class="stat-number">42%</div>
+                <div class="stat-label">Average Yield Increase</div>
             </div>
             <div class="stat-card">
-                <i class="fas fa-hands-helping"></i>
-                <div class="stat-number" id="upvote-count">0</div>
-                <div class="stat-label">Total Upvotes</div>
+                <i class="fas fa-water"></i>
+                <div class="stat-number">35%</div>
+                <div class="stat-label">Water Savings</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-hand-holding-usd"></i>
+                <div class="stat-number">60%</div>
+                <div class="stat-label">Income Increase</div>
             </div>
         </div>
     </main>
 
-    <div class="notification" id="notification">Solution submitted successfully!</div>
+    <div class="chat-toggle" id="chat-toggle">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <div class="chat-container" id="chat-container">
+        <div class="chat-header">
+            <h3><i class="fas fa-robot"></i> Green Sole Assistant</h3>
+            <button class="chat-close" id="chat-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot-message">
+                Hello! I'm your Green Sole assistant. How can I help with your farming today?
+            </div>
+            <div class="message bot-message">
+                You can ask me about crop diseases, weather forecasts, market prices, or farming techniques.
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Ask about crops, weather, or markets...">
+            <button id="send-chat"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
 
     <script>
-        // Mock data for demonstration (would be replaced by json-server in production)
-        const mockData = {
-            diseases: [
-                {
-                    id: 1,
+        // Disease database with detailed information
+        const diseaseDatabase = {
+            maize: {
+                yellowing: {
+                    name: "Maize Lethal Necrosis Disease",
+                    description: "A serious viral disease affecting maize crops characterized by yellowing and drying of leaves.",
+                    solution: "Use certified disease-free seeds, remove infected plants, control aphid vectors with insecticides, and rotate with non-cereal crops.",
+                    prevention: "Plant resistant varieties, maintain field hygiene, and monitor for aphids regularly."
+                },
+                spots: {
+                    name: "Northern Corn Leaf Blight",
+                    description: "Fungal disease causing long, grayish-green or tan lesions on leaves that eventually turn brown.",
+                    solution: "Apply fungicides containing azoxystrobin or propiconazole. Remove crop debris after harvest to reduce fungal spores.",
+                    prevention: "Rotate crops, use resistant hybrids, and avoid overhead irrigation."
+                }
+            },
+            wheat: {
+                yellowing: {
+                    name: "Wheat Yellow Rust",
+                    description: "Fungal disease causing bright yellow pustules on leaves that reduce photosynthesis.",
+                    solution: "Apply fungicides at first sign of disease. Use mixtures of triazoles and strobilurins for best results.",
+                    prevention: "Plant resistant varieties, avoid excessive nitrogen fertilization, and remove volunteer wheat plants."
+                },
+                mold: {
                     name: "Powdery Mildew",
-                    crop: "Wheat",
-                    symptoms: "White powdery spots on leaves and stems",
-                    solution: "Apply sulfur-based fungicides and ensure proper plant spacing for air circulation",
-                    difficulty: 3
+                    description: "White powdery fungal growth on leaves and stems that reduces plant vigor.",
+                    solution: "Apply sulfur or potassium bicarbonate-based fungicides. Improve air circulation around plants.",
+                    prevention: "Plant resistant varieties, avoid dense planting, and water in the morning."
+                }
+            },
+            coffee: {
+                spots: {
+                    name: "Coffee Leaf Rust",
+                    description: "Orange-yellow powdery spots on the underside of leaves causing defoliation.",
+                    solution: "Apply copper-based fungicides. Prune affected branches and improve air circulation.",
+                    prevention: "Plant resistant varieties, maintain proper shade, and ensure balanced nutrition."
                 },
-                {
-                    id: 2,
-                    name: "Late Blight",
-                    crop: "Tomatoes, Potatoes",
-                    symptoms: "Dark lesions on leaves with white fungal growth under moist conditions",
-                    solution: "Remove infected plants, apply copper-based fungicides, and avoid overhead watering",
-                    difficulty: 4
+                wilting: {
+                    name: "Coffee Wilt Disease",
+                    description: "Fungal disease causing sudden wilting and death of coffee plants.",
+                    solution: "Remove and destroy infected plants. Solarize soil before replanting.",
+                    prevention: "Use disease-free planting material and avoid wounding plants during cultivation."
+                }
+            },
+            tomato: {
+                spots: {
+                    name: "Early Blight",
+                    description: "Dark concentric spots on leaves that lead to yellowing and defoliation.",
+                    solution: "Apply chlorothalonil or copper-based fungicides. Remove affected leaves promptly.",
+                    prevention: "Rotate crops, stake plants for better air circulation, and water at the base."
                 },
-                {
-                    id: 3,
+                wilting: {
                     name: "Fusarium Wilt",
-                    crop: "Bananas",
-                    symptoms: "Yellowing and wilting of lower leaves, vascular discoloration",
-                    solution: "Use resistant varieties, practice crop rotation, and solarize soil",
-                    difficulty: 5
-                },
-                {
-                    id: 4,
-                    name: "Bacterial Leaf Spot",
-                    crop: "Peppers",
-                    symptoms: "Small, water-soaked spots that turn brown or black with yellow halos",
-                    solution: "Remove infected leaves, avoid overhead watering, and apply copper sprays",
-                    difficulty: 2
-                },
-                {
-                    id: 5,
-                    name: "Root Knot Nematodes",
-                    crop: "Various Vegetables",
-                    symptoms: "Galls or knots on roots, stunted growth, yellowing plants",
-                    solution: "Solarize soil, use nematode-resistant varieties, and practice crop rotation",
-                    difficulty: 4
+                    description: "Soil-borne fungus causing yellowing and wilting of lower leaves that progresses upward.",
+                    solution: "No cure for infected plants. Remove and destroy. Solarize soil before replanting.",
+                    prevention: "Plant resistant varieties, rotate with non-solanaceous crops, and improve soil drainage."
                 }
-            ],
-            solutions: [
-                {
-                    id: 1,
-                    cropName: "Tomatoes",
-                    problem: "Blossom End Rot",
-                    solution: "Maintain consistent soil moisture and add calcium to the soil",
-                    upvotes: 5
+            },
+            banana: {
+                yellowing: {
+                    name: "Fusarium Wilt (Panama Disease)",
+                    description: "Fungal disease causing yellowing and wilting of leaves, eventually killing the plant.",
+                    solution: "No effective chemical control. Remove and destroy infected plants.",
+                    prevention: "Plant resistant varieties, use disease-free planting material, and disinfect tools."
                 },
-                {
-                    id: 2,
-                    cropName: "Maize",
-                    problem: "Armyworm Infestation",
-                    solution: "Use neem oil spray or introduce natural predators like birds",
-                    upvotes: 3
+                spots: {
+                    name: "Black Sigatoka",
+                    description: "Dark leaf spots that coalesce and cause large necrotic areas reducing yield.",
+                    solution: "Apply systemic fungicides in rotation. Remove severely infected leaves.",
+                    prevention: "Improve air circulation, avoid overhead irrigation, and plant at recommended spacing."
                 }
-            ]
+            }
         };
 
+        // Initialize the application
         document.addEventListener('DOMContentLoaded', () => {
             // Initialize the app
             checkDarkModePreference();
-            fetchDiseases();
-            fetchSolutions();
             setupEventListeners();
-            updateStats();
+            initVisualization();
         });
 
         // DOM Elements
         const themeToggle = document.getElementById('theme-toggle');
-        const diseasesContainer = document.getElementById('diseases-container');
-        const searchInput = document.getElementById('search-input');
-        const searchBtn = document.getElementById('search-btn');
-        const searchResults = document.getElementById('search-results');
-        const solutionForm = document.getElementById('solution-submission-form');
-        const solutionsContainer = document.getElementById('solutions-container');
-        const notification = document.getElementById('notification');
-        const diseaseCount = document.getElementById('disease-count');
-        const solutionCount = document.getElementById('solution-count');
-        const upvoteCount = document.getElementById('upvote-count');
+        const chatToggle = document.getElementById('chat-toggle');
+        const chatContainer = document.getElementById('chat-container');
+        const chatClose = document.getElementById('chat-close');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const sendChat = document.getElementById('send-chat');
+        const diagnoseBtn = document.getElementById('diagnose-btn');
+        const cropSelect = document.getElementById('crop-select');
+        const symptomSelect = document.getElementById('symptom-select');
+        const diagnosisResults = document.getElementById('diagnosis-results');
+        const solutionForm = document.getElementById('solution-form');
 
-        // Show notification
-        function showNotification(message) {
-            notification.textContent = message;
-            notification.classList.add('show');
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+        // Initialize data visualization
+        function initVisualization() {
+            const ctx = document.getElementById('farm-visualization').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Maize', 'Wheat', 'Coffee', 'Tea', 'Tomatoes', 'Bananas'],
+                    datasets: [{
+                        label: 'Yield Increase (%)',
+                        data: [42, 38, 25, 30, 55, 40],
+                        backgroundColor: [
+                            'rgba(124, 179, 66, 0.7)',
+                            'rgba(46, 125, 50, 0.7)',
+                            'rgba(139, 69, 19, 0.7)',
+                            'rgba(34, 139, 34, 0.7)',
+                            'rgba(220, 20, 60, 0.7)',
+                            'rgba(255, 215, 0, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(124, 179, 66, 1)',
+                            'rgba(46, 125, 50, 1)',
+                            'rgba(139, 69, 19, 1)',
+                            'rgba(34, 139, 34, 1)',
+                            'rgba(220, 20, 60, 1)',
+                            'rgba(255, 215, 0, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Percentage Increase'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Crops'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Crop Yield Improvement with Green Sole',
+                            font: {
+                                size: 18
+                            }
+                        },
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
         }
 
-        // Update stats
-        function updateStats() {
-            // Using mock data for demonstration
-            diseaseCount.textContent = mockData.diseases.length;
-            solutionCount.textContent = mockData.solutions.length;
-            const totalUpvotes = mockData.solutions.reduce((sum, solution) => sum + (solution.upvotes || 0), 0);
-            upvoteCount.textContent = totalUpvotes;
+        // Event Listeners Setup
+        function setupEventListeners() {
+            // Theme toggle
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleDarkMode);
+            }
+            
+            // Chat toggle
+            chatToggle.addEventListener('click', () => {
+                chatContainer.classList.add('open');
+            });
+            
+            // Chat close
+            chatClose.addEventListener('click', () => {
+                chatContainer.classList.remove('open');
+            });
+            
+            // Send chat message
+            sendChat.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+            
+            // Diagnosis functionality
+            diagnoseBtn.addEventListener('click', diagnoseCrop);
+            
+            // Solution form submission
+            solutionForm.addEventListener('submit', submitSolution);
+        }
+
+        // Diagnose crop issues
+        function diagnoseCrop() {
+            const crop = cropSelect.value;
+            const symptom = symptomSelect.value;
+            
+            if (!crop || !symptom) {
+                showNotification('Please select both a crop and symptom', 'error');
+                return;
+            }
+            
+            // Show loading
+            diagnosisResults.innerHTML = `
+                <div class="disease-result">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                    <p>Analyzing symptoms using our AI model...</p>
+                </div>
+            `;
+            
+            // Simulate AI processing
+            setTimeout(() => {
+                const disease = diseaseDatabase[crop]?.[symptom];
+                
+                if (disease) {
+                    diagnosisResults.innerHTML = `
+                        <div class="disease-result">
+                            <h3><i class="fas fa-bug"></i> ${disease.name}</h3>
+                            <p><strong>Description:</strong> ${disease.description}</p>
+                            <p><strong>Recommended Solution:</strong> ${disease.solution}</p>
+                            <p><strong>Prevention:</strong> ${disease.prevention}</p>
+                            <div class="solution-form" style="margin-top: 1.5rem;">
+                                <h4><i class="fas fa-lightbulb"></i> Did this solution work for you?</h4>
+                                <button class="upvote-btn" style="margin-right: 1rem;"><i class="fas fa-thumbs-up"></i> Yes, it helped</button>
+                                <button class="upvote-btn"><i class="fas fa-thumbs-down"></i> No, didn't work</button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    diagnosisResults.innerHTML = `
+                        <div class="disease-result">
+                            <h3><i class="fas fa-search"></i> Diagnosis Result</h3>
+                            <p>Our AI couldn't find a specific match for these symptoms.</p>
+                            <p>Please try being more specific or contact our support team for personalized assistance.</p>
+                            <div class="solution-form" style="margin-top: 1.5rem;">
+                                <h4><i class="fas fa-users"></i> Ask the Community</h4>
+                                <p>Describe your issue and our farming community might have a solution:</p>
+                                <textarea id="community-question" placeholder="Describe your crop issue..." style="width: 100%; margin: 1rem 0;"></textarea>
+                                <button class="upvote-btn"><i class="fas fa-paper-plane"></i> Ask Community</button>
+                            </div>
+                        </div>
+                    `;
+                }
+            }, 2000);
+        }
+
+        // Submit solution
+        function submitSolution(e) {
+            e.preventDefault();
+            
+            const crop = document.getElementById('solution-crop').value;
+            const problem = document.getElementById('solution-problem').value;
+            const solution = document.getElementById('solution-description').value;
+            
+            if (!crop || !problem || !solution) {
+                showNotification('Please fill in all fields', 'error');
+                return;
+            }
+            
+            // Add to solutions container
+            const solutionsContainer = document.getElementById('solutions-container');
+            const solutionCard = document.createElement('div');
+            solutionCard.className = 'solution-card';
+            solutionCard.innerHTML = `
+                <h3><i class="fas fa-user"></i> You - ${crop}</h3>
+                <p><strong>Problem:</strong> ${problem}</p>
+                <p><strong>Solution:</strong> ${solution}</p>
+                <button class="upvote-btn"><i class="fas fa-thumbs-up"></i> Helpful (0)</button>
+            `;
+            
+            // Add to top of the list
+            solutionsContainer.insertBefore(solutionCard, solutionsContainer.firstChild);
+            
+            // Reset form
+            solutionForm.reset();
+            
+            // Show success notification
+            showNotification('Your solution has been shared with the community!', 'success');
+        }
+
+        // Send chat message
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            
+            // Clear input
+            chatInput.value = '';
+            
+            // Simulate AI response after delay
+            setTimeout(() => {
+                // Enhanced responses based on keywords
+                let response;
+                
+                if (message.toLowerCase().includes('price') || message.toLowerCase().includes('market')) {
+                    response = "Current market prices in Kenya: Maize KES 2,800 per 90kg bag, Coffee KES 300 per kg, Tea KES 200 per kg. Prices updated daily.";
+                } 
+                else if (message.toLowerCase().includes('weather') || message.toLowerCase().includes('rain')) {
+                    response = "Weather forecast for farming regions: Expect moderate rainfall in Central Highlands, sunny in Rift Valley. Ideal planting conditions this week.";
+                }
+                else if (message.toLowerCase().includes('maize') && message.toLowerCase().includes('yellow')) {
+                    response = "For yellowing maize leaves, it might be Maize Lethal Necrosis. Remove infected plants, use certified seeds, and control aphids with neem oil.";
+                }
+                else if (message.toLowerCase().includes('tomato') && (message.toLowerCase().includes('spot') || message.toLowerCase().includes('blight'))) {
+                    response = "Tomato spots are often Early Blight. Apply copper-based fungicide, remove affected leaves, and improve air circulation around plants.";
+                }
+                else if (message.toLowerCase().includes('drone') || message.toLowerCase().includes('spray')) {
+                    response = "Our drone services cost KES 1,500 per acre for spraying. We cover Central, Rift Valley, and Western regions. Book online or call 0700-123456.";
+                }
+                else {
+                    const responses = [
+                        "For that crop issue, I recommend checking soil moisture levels and applying organic fungicide.",
+                        "Market prices for maize are currently at KES 2,800 per 90kg bag in Nairobi markets.",
+                        "The weather forecast for your region shows a 60% chance of rain in the next 3 days.",
+                        "I've analyzed your photo and identified it as Fall Armyworm. Recommended treatment: neem oil spray.",
+                        "Our records show your farm is suitable for avocado cultivation. Would you like a planting schedule?",
+                        "Based on your location, I recommend the following companion plants: beans with maize, onions with carrots."
+                    ];
+                    response = responses[Math.floor(Math.random() * responses.length)];
+                }
+                
+                addMessage(response, 'bot');
+            }, 1000 + Math.random() * 1500);
+        }
+
+        // Add message to chat
+        function addMessage(text, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.classList.add(sender + '-message');
+            messageElement.textContent = text;
+            
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type === 'error' ? 'error' : ''}`;
+            notification.textContent = message;
+            notification.style.position = 'fixed';
+            notification.style.top = '20px';
+            notification.style.right = '20px';
+            notification.style.padding = '1.2rem 2.2rem';
+            notification.style.background = type === 'error' ? 'linear-gradient(135deg, #d32f2f, #b71c1c)' : 'var(--gradient-accent)';
+            notification.style.color = 'white';
+            notification.style.borderRadius = 'var(--border-radius)';
+            notification.style.boxShadow = 'var(--shadow)';
+            notification.style.zIndex = '1000';
+            notification.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            notification.style.transform = 'translateX(200%)';
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Hide after delay
+            setTimeout(() => {
+                notification.style.transform = 'translateX(200%)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 400);
+            }, 3000);
         }
 
         // Dark Mode Toggle
@@ -644,235 +1367,10 @@
             }
         }
 
-        // Fetch Crop Diseases (using mock data)
-        function fetchDiseases() {
-            // Simulate API delay
-            setTimeout(() => {
-                if (diseasesContainer && Array.isArray(mockData.diseases)) {
-                    renderDiseases(mockData.diseases);
-                }
-            }, 800);
-        }
-
-        // Render Diseases
-        function renderDiseases(diseases) {
-            if (!diseasesContainer) return;
-            
-            diseasesContainer.innerHTML = '';
-            
-            if (!diseases || diseases.length === 0) {
-                diseasesContainer.innerHTML = '<p>No diseases found.</p>';
-                return;
-            }
-            
-            diseases.forEach(disease => {
-                const diseaseCard = document.createElement('div');
-                diseaseCard.className = 'disease-card';
-                diseaseCard.innerHTML = `
-                    <h3><i class="fas fa-leaf"></i> ${disease.name || 'Unknown Disease'}</h3>
-                    <p><strong>Crop Affected:</strong> ${disease.crop || 'Various crops'}</p>
-                    <p><strong>Symptoms:</strong> ${disease.symptoms || 'Not specified'}</p>
-                    <p><strong>Solution:</strong> ${disease.solution || 'No solution provided'}</p>
-                    <div class="difficulty">Difficulty: ${disease.difficulty || '?'}/5</div>
-                `;
-                diseasesContainer.appendChild(diseaseCard);
-            });
-        }
-
-        // Fetch Community Solutions (using mock data)
-        function fetchSolutions() {
-            // Simulate API delay
-            setTimeout(() => {
-                if (solutionsContainer && Array.isArray(mockData.solutions)) {
-                    renderSolutions(mockData.solutions);
-                }
-            }, 1000);
-        }
-
-        // Render Solutions
-        function renderSolutions(solutions) {
-            if (!solutionsContainer) return;
-            
-            solutionsContainer.innerHTML = '';
-            
-            if (!solutions || solutions.length === 0) {
-                solutionsContainer.innerHTML = '<p>No community solutions yet. Be the first to share!</p>';
-                return;
-            }
-            
-            // Sort solutions by upvotes (descending)
-            solutions.sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
-            
-            solutions.forEach(solution => {
-                const solutionCard = document.createElement('div');
-                solutionCard.className = 'solution-card';
-                solutionCard.innerHTML = `
-                    <h3><i class="fas fa-seedling"></i> ${solution.cropName || 'Unknown Crop'} - ${solution.problem || 'Unspecified Problem'}</h3>
-                    <p>${solution.solution || 'No solution provided'}</p>
-                    <div class="solution-footer">
-                        <button class="upvote-btn" data-id="${solution.id}">
-                            <i class="fas fa-thumbs-up"></i> Upvote
-                        </button>
-                        <span class="upvote-count">${solution.upvotes || 0} upvotes</span>
-                    </div>
-                `;
-                solutionsContainer.appendChild(solutionCard);
-            });
-
-            // Add event listeners to upvote buttons
-            document.querySelectorAll('.upvote-btn').forEach(button => {
-                button.addEventListener('click', handleUpvote);
-            });
-        }
-
-        // Handle Upvote
-        function handleUpvote(event) {
-            const solutionId = event.target.getAttribute('data-id');
-            const upvoteBtn = event.target;
-            const upvoteCountEl = event.target.nextElementSibling;
-            
-            if (!solutionId) return;
-            
-            // Disable button during request
-            upvoteBtn.disabled = true;
-            const originalText = upvoteBtn.innerHTML;
-            upvoteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Upvoting...';
-            
-            // Find solution in mock data
-            const solution = mockData.solutions.find(s => s.id == solutionId);
-            if (solution) {
-                // Simulate API delay
-                setTimeout(() => {
-                    solution.upvotes = (solution.upvotes || 0) + 1;
-                    
-                    // Update the count immediately
-                    const currentCount = parseInt(upvoteCountEl.textContent) || 0;
-                    upvoteCountEl.textContent = `${currentCount + 1} upvotes`;
-                    upvoteBtn.disabled = false;
-                    upvoteBtn.innerHTML = originalText;
-                    
-                    // Update stats
-                    updateStats();
-                    showNotification('Solution upvoted!');
-                }, 500);
-            } else {
-                upvoteBtn.disabled = false;
-                upvoteBtn.innerHTML = originalText;
-                showNotification('Failed to upvote. Please try again.');
-            }
-        }
-
-        // Handle Search
-        function handleSearch() {
-            const searchTerm = searchInput ? searchInput.value.trim().toLowerCase() : '';
-            
-            if (!searchTerm) {
-                if (searchResults) {
-                    searchResults.innerHTML = '<p class="error">Please enter a search term</p>';
-                }
-                return;
-            }
-            
-            // Use mock data for search
-            const filteredDiseases = mockData.diseases.filter(disease => 
-                (disease.name && disease.name.toLowerCase().includes(searchTerm)) || 
-                (disease.crop && disease.crop.toLowerCase().includes(searchTerm)) ||
-                (disease.symptoms && disease.symptoms.toLowerCase().includes(searchTerm))
-            );
-            
-            if (!searchResults) return;
-            
-            if (filteredDiseases.length === 0) {
-                searchResults.innerHTML = '<p>No results found for "' + searchTerm + '"</p>';
-                return;
-            }
-            
-            searchResults.innerHTML = '<h3>Search Results:</h3>';
-            filteredDiseases.forEach(disease => {
-                const diseaseCard = document.createElement('div');
-                diseaseCard.className = 'disease-card';
-                diseaseCard.innerHTML = `
-                    <h3><i class="fas fa-search"></i> ${disease.name || 'Unknown Disease'}</h3>
-                    <p><strong>Crop Affected:</strong> ${disease.crop || 'Various crops'}</p>
-                    <p><strong>Solution:</strong> ${disease.solution || 'No solution provided'}</p>
-                `;
-                searchResults.appendChild(diseaseCard);
-            });
-        }
-
-        // Handle Form Submission
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            
-            if (!solutionForm) return;
-            
-            const cropNameInput = document.getElementById('crop-name');
-            const problemInput = document.getElementById('problem');
-            const solutionInput = document.getElementById('solution');
-            const submitBtn = solutionForm.querySelector('button[type="submit"]');
-            
-            if (!cropNameInput || !problemInput || !solutionInput || !submitBtn) return;
-            
-            const cropName = cropNameInput.value.trim();
-            const problem = problemInput.value.trim();
-            const solution = solutionInput.value.trim();
-            
-            if (!cropName || !problem || !solution) {
-                showNotification('Please fill in all fields');
-                return;
-            }
-            
-            submitBtn.disabled = true;
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
-            
-            // Simulate API request
-            setTimeout(() => {
-                // Create new solution
-                const newSolution = {
-                    id: mockData.solutions.length + 1,
-                    cropName,
-                    problem,
-                    solution,
-                    upvotes: 0
-                };
-                
-                // Add to mock data
-                mockData.solutions.push(newSolution);
-                
-                // Clear the form
-                solutionForm.reset();
-                // Refresh the solutions list
-                fetchSolutions();
-                // Update stats
-                updateStats();
-                showNotification('Solution submitted successfully!');
-                
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalText;
-            }, 1000);
-        }
-
-        // Event Listeners Setup
-        function setupEventListeners() {
-            // Theme toggle
-            if (themeToggle) {
-                themeToggle.addEventListener('click', toggleDarkMode);
-            }
-            
-            // Search functionality
-            if (searchBtn && searchInput) {
-                searchBtn.addEventListener('click', handleSearch);
-                searchInput.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') handleSearch();
-                });
-            }
-            
-            // Form submission
-            if (solutionForm) {
-                solutionForm.addEventListener('submit', handleFormSubmit);
-            }
-        }
+        // Initial chat message
+        setTimeout(() => {
+            addMessage("Welcome to Green Sole! I'm your farming assistant. How can I help you today?", 'bot');
+        }, 2000);
     </script>
 </body>
 </html>
